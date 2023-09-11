@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Service Dashboard</title>
+    <link rel="icon" href="favicon.ico" type="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="fonts/Font-Awesome-5.13.0/font-awesome.css" />
+    <link type="text/css" rel="stylesheet" href="fonts/Roboto-Font/Roboto-RCondensed.css" />
+    <link rel="stylesheet" type="text/css" href="custom/css/style.css">
+    <link rel="stylesheet" type="text/css" href="custom/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="custom/css/dataTable.css" />
+    <link rel="stylesheet" type="text/css" href="custom/css/bootstrap-custom-multiselect.css" />
+    <script type="text/javascript" src="custom/js/alasql.min.js"></script>
+    <script type="text/javascript" src="custom/js/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="ServiceDashboard.js"></script>
+    <script type="text/javascript" src="custom/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="custom/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="custom/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="custom/js/bootstrap-multiselect.js"></script>
+
+    <style>
+        .input-multiselect .multiselect-native-select > .btn-group > .multiselect.btn {
+            background-color: #FFFFFF;
+        }
+        .report-search-container{
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            position: absolute;
+            top: 5px;
+            right: 220px;
+            z-index: 9;
+        }
+        table.table-container > thead > tr > th{
+            cursor: pointer;
+        }
+         table.table-container>thead>tr>th:last-child {
+            cursor: pointer;
+        }
+
+        table.table-container>thead>tr>th:last-child::after {
+            display: block;
+        }
+
+        table.table-container>thead>tr>th:last-child::before {
+            display: block;
+        }
+        table.table-container > thead > tr > th::after{
+            position: absolute;
+            z-index: 9;
+            font-family: 'Font Awesome 5 Free';
+            color: #FFFFFF;
+            width: 8px;
+            height: 8px;
+            right: 5px;
+            font-weight: 900;
+            content: "\f0dd";
+            top: 10px;
+        }
+        table.table-container > thead > tr > th::before{
+            position: absolute;
+            z-index: 9;
+            font-family: 'Font Awesome 5 Free';
+            color: #FFFFFF;
+            width: 8px;
+            height: 8px;
+            right: 5px;
+            font-weight: 900;
+            content: "\f0de";
+            top: 10px;
+        }
+        table.table-container > thead > tr > th.desc::after{
+            color: #88A3A6;
+        }
+        table.table-container > thead > tr > th.asc::before{
+            color: #88A3A6;
+        }
+        table.table-container .child{
+            display: none;
+        }
+		 .table-container#tblServiceQueue > thead > tr > th:nth-of-type(1),
+        .table-container#tblServiceQueue > thead > tr > th:nth-of-type(2) {
+            background-color: #3f617a;
+            text-align: left;
+            z-index: 15;
+        }
+        .table-container#tblServiceQueue > tbody > tr > td:nth-of-type(1),
+        .table-container#tblServiceQueue > tbody > tr > td:nth-of-type(2) {
+            position: sticky;
+        }
+		.table-container#tblServiceQueue > tbody > tr:nth-of-type(even) > td:nth-of-type(1),
+        .table-container#tblServiceQueue > tbody > tr:nth-of-type(even) > td:nth-of-type(2) {
+            background-color: #ecf2f4;
+        }
+		.table-container#tblServiceQueue > tbody > tr:nth-of-type(odd) > td:nth-of-type(1),
+        .table-container#tblServiceQueue > tbody > tr:nth-of-type(odd) > td:nth-of-type(2) {
+            background-color: #FFFFFF;
+        }
+
+        .table-container#tblServiceQueue > tfoot > tr > td:nth-of-type(1),
+        .table-container#tblServiceQueue > tfoot > tr > td:nth-of-type(2) {
+            z-index: 9;
+            position: sticky;
+        }
+
+        .table-container#tblServiceQueue > tfoot > tr > td:nth-of-type(1),
+		.table-container#tblServiceQueue > tfoot > tr > td:nth-of-type(2){
+            background-color: #b0c4cc;
+        }
+		
+    </style>
+
+</head>
+<body>
+    <div class="body-container">
+        <header class="header-container">
+            <div class="amex-logo">
+                <img class="logo" src="custom/images/amex_logo.png" alt="Amex" title="Amex" />
+            </div>
+            
+            <h2 class="h2-head">Service Dashboard</h2>
+            <div class="header-right hide">
+                
+            </div>
+        </header>
+        <section class="section-container">
+            <div class="form-body-container" style="display: none;">
+                <ul class="form-container flex">
+                    <li style="min-width: 500px;">
+                        <div class="input-group flex">
+                            <div class="label-field">
+                                <label>Service Name</label>
+                            </div>
+                            <div class="input-field input-multiselect" style="width: 500px;">
+                                <select id="ddlServiceList" class="input-select" tabindex="0" multiple="multiple" style="height: 32px !important;">
+                                    
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="input-field"><button type="button" class="input-btn green-btn" id="txtSearch" onclick="btnSearchClick()">Search</button></div>
+                    </li>
+
+                    <li></li>
+                </ul>
+ 
+            </div>
+            <div class="report-table-container">
+                <div class="report-table-header">
+                    <div class="report-table-search pull-right">
+                        <label>Search: </label><input class="input-text1" id="txtSearchInput"></input>
+                    </div>
+                </div>
+                <div class="report-table-inner-container" style="overflow: auto; height: calc(100% - 34px) ;">
+                    <table id="tblServiceQueue" class="table-container" style="width: 100%; table-layout: auto;" >
+                       <thead>
+                       <tr>
+                       <th scope="col" class="center" >Service Name</th>
+                       <th scope="col" class="center" style="width: 100px;">Contacts Waiting</th>
+                       <th scope="col" class="center" style="width: 100px;">Contacts Offered</th>
+                       <th scope="col" class="center" style="width: 100px;">Contacts 
+                        Answered</th>
+                       <th scope="col" class="center" style="width: 100px;">Contacts Abandoned</th>
+					   <th scope="col" class="center" style="width: 100px;">Transfer Initiated</th>
+                       <th scope="col" class="center" style="width: 100px;">Transfer Accepted</th>
+					   <th scope="col" class="center" style="width: 100px;">Consult Initiated</th>
+					   <th scope="col" class="center" style="width: 100px;">Consult Accepted</th>
+                       <th scope="col" class="center" style="width: 100px;">Service Level %</th>
+                       <th scope="col" class="center" style="width: 100px;">Contacts Active</th>
+                       <th scope="col" class="center" style="width: 100px;">Contacts OnHold</th>
+                       <th scope="col" class="center" style="width: 100px;">Agents Idle</th>
+                       <th scope="col" class="center" style="width: 100px;">Agents on Not Ready</th>
+                       <th scope="col" class="center" style="width: 120px;">Avg. Handling Time</th>
+                       <th scope="col" class="center" style="width: 120px;">Expected Wait Time</th>
+                       </tr>
+                       </thead>
+                       <tbody>
+
+                       </tbody>
+                       <tfoot>
+                           
+                       </tfoot>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <script type="text/javascript">
+        var serviceGroupName = '';
+        var serviceGroupList = {};
+		 var totalAnsweredContact = 0;
+        var totalAbandonedContact = 0;
+        var totalAnsweredAfterThreshold = 0;
+        var totalAbandonedAfterThreshold = 0;
+        var serviceGroupName = '';
+
+        $(function () {
+            serviceGroupName = '0'
+            get_response("SERVICE");
+            getDropDownData();
+        });
+
+        function btnSearchClick() {
+            serviceGroupName = $("#ddlServiceList").val() == null ? '0' : $("#ddlServiceList").val();
+            get_response("SERVICE");
+        }
+     
+    </script>
+    <script>
+        //table search filter
+        $(document).ready( 
+            function () { 
+                $("#txtSearchInput").on("keyup", function () {
+                    var _searchValue = $("#txtSearchInput").val()
+                    var _whereFilerQuery = "";
+                    var _totalFilterQuery =   "SELECT SUM(answered) as answered, SUM(abandoned) as abandoned,"
+						+ "SUM(answeredAfterThreshold) as answeredAfterThreshold, SUM(abandonedAfterThreshold) as abandonedAfterThreshold,"
+						+ "SUM(transferredAccepted) as transferredAccepted, SUM(acw) as acw,"
+						+ "SUM(holds) as holds, SUM(activeTimeDuration) as activeTimeDuration,"
+						+ "SUM(acwDuration) as acwDuration, SUM(holdDuration) as holdDuration,"
+						+ "SUM(contactsWaiting) as contactsWaiting,SUM(expectedWaitTime) as expectedWaitTime";
+                    if(_searchValue != undefined && _searchValue != "") {
+                        _whereFilerQuery = "WHERE serviceDisplayName LIKE '%" + _searchValue + "%'";
+                    }
+                    var _totalQuery = _totalFilterQuery + " FROM ? " + _whereFilerQuery;
+                    var totalList = alasql(_totalQuery, [_queueList_new]);
+                    $("#tblServiceQueue tbody > tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(_searchValue.toLowerCase()) > -1)
+                    });
+                    var result = [];
+                    $('#tblServiceQueue tbody > tr').each(function () {
+                        var _style = $(this).css('display')
+                        if (_style != "none") {
+                            $('td', this).each(function (index, val) {
+                                if (!result[index])
+                                    result[index] = 0;
+                                var _tdText = $(val).text() == '-' ? "0" : $(val).text();
+                                result[index] += parseInt(hhmmssTOseconds(_tdText));
+                            });
+                        }
+                    });
+                    result[0] = "Total";
+					result[result.length - 1] = calculateExpectedWaitTime(totalList[0]);	
+					result[result.length - 2] = calculateAverageHandleTime(totalList[0]);
+					result[result.length - 3] = "-";
+					result[result.length - 4] = "-";
+					result[result.length - 7] = calculateServiceLevelPercentage(totalList[0]);;
+                    if (result[0] == "NaN:NaN:NaN")
+                        result[0] = "No Data Found";
+                    $('#tblServiceQueue tfoot').html("");
+                    $('#tblServiceQueue tfoot').append('<tr></tr>');
+                    $(result).each(function () {
+                        $('#tblServiceQueue tfoot > tr').append('<td class=\"align-center\">' + this + '</td>')
+                    });
+					get_tblServiceQueue_posval();
+                });
+            });
+        //table search filter
+        $(document).ready( function () {
+            get_tblServiceQueue_posval();
+        });
+        function get_tblServiceQueue_posval() {
+			var serviceQueue_col_head = ".table-container#tblServiceQueue > thead > tr:first-child > th";
+			serviceQueue_col_body = ".table-container#tblServiceQueue > tbody > tr > td";
+			serviceQueue_col_foot = ".table-container#tblServiceQueue > tfoot > tr > td";
+			serviceQueue_colone_Width_val = $(serviceQueue_col_head +":nth-of-type(1)").innerWidth();
+			serviceQueue_colone_Width = serviceQueue_colone_Width_val - 1;
+			console.log("col_one Width : " + serviceQueue_colone_Width);
+			serviceQueue_coltwo_Width_val = $(serviceQueue_col_head +":nth-of-type(2)").innerWidth();
+			serviceQueue_coltwo_Width = serviceQueue_coltwo_Width_val + .5;
+			console.log("col_two Width : " + serviceQueue_coltwo_Width);
+			$(serviceQueue_col_head +":nth-of-type(1)").css("left", "-1px");
+			$(serviceQueue_col_body +":nth-of-type(1)").css("left", "-1px");
+			$(serviceQueue_col_foot +":nth-of-type(1)").css("left", "-1px");
+			$(serviceQueue_col_head +":nth-of-type(2)").css("left", serviceQueue_colone_Width + "px");
+			$(serviceQueue_col_body +":nth-of-type(2)").css("left", serviceQueue_colone_Width + "px");
+			$(serviceQueue_col_foot +":nth-of-type(2)").css("left", serviceQueue_colone_Width + "px");
+		}
+    </script>
+    <script>
+
+        //Datatable Height
+        $(document).ready(
+            function () {
+                function setHeight() {
+                    windowHeight = $(window).innerHeight();
+                    $('.report-table-container').height(
+                        $(window).height() - 48 - $("header").height() - $(".form-body-container").height());
+                };
+                setHeight();
+
+                $(window).resize(function () {
+                    setHeight();
+                });
+
+                $(window).scroll(function () {
+                    setHeight();
+                });
+            });
+            //Datatable Height
+
+                   
+window.addEventListener('message', function (event) {
+	WriteLog(INFO, "Listener for Toekn --> START");
+	WriteLog(INFO, event.data);
+	if (event.data.message.toString() == "DashboardInfo") {
+
+		WriteLog(INFO, "Dashboard Refresh Event Received Successfully");
+		clearTimer();
+		refreshDashboard = event.data.refresh;
+		dashboardID = event.data.dashboardId;
+		
+		if (refreshDashboard) {
+			refreshDashboardEvent();
+		}
+	}
+});
+
+function refreshDashboardEvent() {
+     if (refreshDashboard && dashboardID == 'DASHBOARD_002') {
+		loadServiceDashboard();
+	}
+	objTimeount = setTimeout(function () {
+		refreshDashboardEvent();
+	}, autoRefreshTime * 1000);
+
+}    
+        
+        
+        </script>
+</body>
+
+
+</html>

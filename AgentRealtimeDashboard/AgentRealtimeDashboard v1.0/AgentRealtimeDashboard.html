@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amex</title>
+    <link rel="icon" href="favicon.ico" type="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="fonts/Font-Awesome-5.13.0/font-awesome.css" />
+    <link type="text/css" rel="stylesheet" href="fonts/Roboto-Font/Roboto-RCondensed.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/dataTable.css" />
+    <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="js/inline-script.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/alasql.min.js"></script>
+    <script type="text/javascript" src="js/AgentRealtimeDashboard.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <style>
+        .table-detail-container>thead>tr.child-head>th:first-child {
+            background-color: #801c4f;
+        }
+        .table-detail-container#agentloginsummarytbl>thead>tr>th:first-child {
+            background-color: #801c4f;
+        }
+        .table-detail-container#agentloginsummarytbl>tbody>tr>td:first-child {
+            color: #484848;
+            background-color: #f7f7f7;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="amex-logo">
+            <img class="logo" src="images/amex_logo.png" alt="Amex" title="Amex" />
+        </div>
+        <h2 class="h2-head">Agent RealTime Dashboard</h2>
+        <div class="header-right ">
+            <div class="agent-detail">
+                <i class="fa fa-user agent-icon"></i>
+                <label class="agent-name" id="lbl_agentId">Agent Name</label>
+            </div>
+        </div>
+    </header>
+    <div class="body-container">
+        <ul class="form-container flex hide" style="padding-bottom: 10px">
+            <li>
+                <div class="field-group">
+                    <div class="label-field">
+                        <label>Agent Name :</label>
+                    </div>
+                    <div class="input-field">
+                        <div class="dropdown-container bottom" id="AgentNameDropdown">
+                            <input type="text" class="input-text" readonly placeholder="Select Agent" />
+                            <i class="fa fa-chevron-down dropdown-icon-btn"></i>
+                            <div class="dropdown-list-container">
+                                <input type="text" class="input-search" id="inputsearch" />
+
+                                <ul class="singleselect-dropdown-list">
+                                    <li style="display: none;"><data></data></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="input-field">
+                    <ul class="btn-container">
+                        <li class="pull-right"><button class="input-btn green-btn">Search</button></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div class="summary-box">
+            <div class="head-content">
+                <h3 class="pull-left">
+                    Login Summary
+                </h3>
+                <div class="pull-right hide">
+                    <ul class="form-container flex table-search">
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Search :</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="text" class="input-text" id="inputsearch"
+                                        data-search-table="agentloginsummarytbl" />
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="summary-box-container">
+                 <ul class="summary-box-list">
+                    <li>
+                        <div style="background-color: #059f42;">
+                            <label>Current State</label>
+                            <h4 id="lbl_AgentState">Ready</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="background-color: #d16000;">
+                            <label>Current State Duration</label>
+                            <h4 id="lbl_CurrentStateDuration">00:00:00</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="background-color: #056f87;">
+                            <label>Total Login Duration</label>
+                            <h4 id="lbl_TotalLoginDuration">00:00:00</h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="report-body-container" style="height: calc(100% - 127px);">
+            <div class="report-table-container">
+                <div class="head-content">
+                    <h3 class="pull-left">
+                        Performance
+                    </h3>
+                    <div class="pull-right hide">
+                        <ul class="form-container flex table-search">
+                            <li>
+                                <div class="field-group">
+                                    <div class="label-field">
+                                        <label>Search :</label>
+                                    </div>
+                                    <div class="input-field">
+                                        <input type="text" class="input-text" id="inputsearch"
+                                            data-search-table="tbl_performanceteam" />
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="table-body-container">
+                    <table class="table-detail-container" id="tbl_performanceteam">
+                        <thead>
+                            <tr>
+                                <th>Channel</th>
+                                <th>Answered</th>
+								<th >Completed</th>
+								<th>Transfer Accepted</th>
+                                <th>Transfer Initiated</th>
+								 <th>Consult Initiated</th>
+                                 <th>Consult Accepted</th>
+                                <th>Avg. Talk</th>
+                                <th>Avg. Hold</th>
+                                <th>Avg. Wrap</th>
+                                <th>AHT</th>
+                                <!--<th class="hide">Concurrency</th>-->
+                                <th>Outbound Calls</th>
+                                <th>Outbound Duration</th>
+                                <th>Hold Count</th>
+                                <th>Hold Duration</th>
+                                <!--<th class="hide">Occupancy %</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td style="background-color: #d0d0d0; font-weight: 500;">Total</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="report-table-container hide">
+                <div class="head-content">
+                    <h3 class="pull-left">
+                        Login Summary
+                    </h3>
+                    <div class="pull-right hide">
+                        <ul class="form-container flex table-search">
+                            <li>
+                                <div class="field-group">
+                                    <div class="label-field">
+                                        <label>Search :</label>
+                                    </div>
+                                    <div class="input-field">
+                                        <input type="text" class="input-text" id="inputsearch"
+                                            data-search-table="agentloginsummarytbl" />
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="table-body-container">
+                    <table class="table-detail-container" id="agentloginsummarytbl">
+                        <thead>
+                           
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="report-table-container pull-left" style="padding-right: 5px;width: 50%;">
+                <div class="head-content">
+                    <h3 class="pull-left">
+                        Interaction Details
+                    </h3>
+                    <div class="pull-right hide">
+                        <ul class="form-container flex table-search">
+                            <li>
+                                <div class="field-group">
+                                    <div class="label-field">
+                                        <label>Search :</label>
+                                    </div>
+                                    <div class="input-field">
+                                        <input type="text" class="input-text" id="inputsearch"
+                                            data-search-table="tbl_interactiondetails" />
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="table-body-container">
+                    <table class="table-detail-container" id="tbl_interactiondetails">
+                        <thead>
+                            <tr>
+                                <th>Channel</th>
+                                <th style="text-align:left;">Queue Name</th>
+                                <th>Answered</th>
+                                <th>Avg. Talk</th>
+                                <th>Avg. Hold</th>
+                                <th>Avg. Wrap</th>
+                                <th>AHT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" style="background-color: #d0d0d0;">Total</td>
+                                
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="report-table-container pull-left" style="padding-left: 5px;width: 50%;">
+                <div class="head-content">
+                    <h3 class="pull-left">AUX Summary</h3>
+                    <div class="pull-right" style="display: none;">
+                        <ul class="form-container flex table-search">
+                            <li>
+                                <div class="field-group">
+                                    <div class="label-field">
+                                        <label>Search :</label>
+                                    </div>
+                                    <div class="input-field">
+                                        <input type="text" class="input-text" id="inputsearch"
+                                            data-search-table="tbl_AUXSummary">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="table-body-container">
+                    <table class="table-detail-container" id="tbl_AUXSummary">
+                        <thead>
+                            <tr>
+                                <th>AUX Name</th>
+                                <th>AUX Count</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" style="background-color: #d0d0d0;font-weight: 500;">Total</td>
+                                
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <script>
+        var serviceGroupList = {};
+        var dashboard = '';
+        $(document).ready(
+            function () {
+                dashboard = 'AGENT1';
+                get_response_agent();
+                refreshAgentDashboardEvent();
+            });
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1036 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amex</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="fonts/Font-Awesome-5.13.0/font-awesome.css" />
+    <link type="text/css" rel="stylesheet" href="fonts/Roboto-Font/Roboto-RCondensed.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" type="text/css" href="css/dataTable.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-custom-multiselect.css">
+    <link rel="stylesheet" type="text/css" href="css/tab.css">
+    
+    <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/inline-script.js"></script>
+    <script type="text/javascript" src="js/alasql.min.js"></script>
+    <script type="text/javascript" src="js/tab.js"></script>
+    
+    <script type="text/javascript" src="QueueRealtimeDashboard.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <style>
+		.report-body-container .report-table-container {
+		height: 100%;
+		}
+        .table-detail-container#supervisorloginsummarytbl > tbody > tr.active > td:first-child, .table-detail-container#supervisorloginsummarytbl > tbody > tr.active > td {
+            background-color: #611b3f;
+            color: #FFFFFF;
+        }
+        .report-body-container{
+            height: 100% !important;
+        }
+       
+		.table-detail-container > thead > tr > th {
+         padding-right: 30px;
+        }
+		 <!--ChannnelTab---->
+		.table-detail-container#tbl_perfchannel > thead > tr > th:nth-of-type(1):before,
+		.table-detail-container#tbl_perfchannel > tbody > tr > td:nth-of-type(1):before,
+		.table-detail-container#tbl_perfchannel > tfoot > tr > td:nth-of-type(1):before	 {
+			content: "";
+			width: 1px;
+			height: 100%;
+			position: absolute;
+			left: -1px;
+			top: 0px;
+		}
+		.table-detail-container#tbl_perfchannel > thead > tr > th:nth-of-type(1):before{
+			background-color: #3f617a;
+			}
+		.table-detail-container#tbl_perfchannel > tbody > tr > td:nth-of-type(1):before,
+		.table-detail-container#tbl_perfchannel > tfoot > tr > td:nth-of-type(1):before{
+		background-color: #e2e2e2;
+		}
+		
+  		.table-detail-container#tbl_perfchannel > thead > tr > th:nth-of-type(1),
+		.table-detail-container#tbl_perfchannel > thead > tr > th:nth-of-type(2) {
+			background-color: #3f617a;
+			text-align: left;
+			z-index: 9;
+		}
+		
+		
+		.table-detail-container#tbl_perfchannel > tbody > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perfchannel > tbody > tr > td:nth-of-type(2) {
+			z-index: 9;
+			position: sticky;
+			background-color: #FFFFFF;
+		}
+		.table-detail-container#tbl_perfchannel > tfoot > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perfchannel > tfoot > tr > td:nth-of-type(2) {
+			z-index: 9;
+			position: sticky;
+			/*background-color: #FFFFFF; */
+		}
+		
+		.table-detail-container#tbl_perfchannel > thead > tr > th:nth-of-type(1),
+		.table-detail-container#tbl_perfchannel > tbody > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perfchannel > tfoot > tr > td:nth-of-type(1)		{
+			left: 0px;
+		}
+
+		
+		.table-detail-container#tbl_perfchannel > thead > tr > th:nth-of-type(2),
+		.table-detail-container#tbl_perfchannel > tbody > tr > td:nth-of-type(2),
+		.table-detail-container#tbl_perfchannel > tfoot > tr > td:nth-of-type(2)		{
+			left: 92px;
+		}
+
+		
+		 <!--LanguageTab---->
+		.table-detail-container#tbl_perflanguage > thead > tr > th:nth-of-type(1):before,
+		.table-detail-container#tbl_perflanguage > tbody > tr > td:nth-of-type(1):before,
+		.table-detail-container#tbl_perflanguage > tfoot > tr > td:nth-of-type(1):before	 {
+			content: "";
+			width: 1px;
+			height: 100%;
+			position: absolute;
+			left: -1px;
+			top: 0px;
+		}
+		.table-detail-container#tbl_perflanguage > thead > tr > th:nth-of-type(1):before{
+			background-color: #3f617a;
+			}
+		.table-detail-container#tbl_perflanguage > tbody > tr > td:nth-of-type(1):before,
+		.table-detail-container#tbl_perflanguage > tfoot > tr > td:nth-of-type(1):before{
+		background-color: #e2e2e2;
+		}
+		
+  		.table-detail-container#tbl_perflanguage > thead > tr > th:nth-of-type(1),
+		.table-detail-container#tbl_perflanguage > thead > tr > th:nth-of-type(2) {
+			background-color: #3f617a;
+			text-align: left;
+			z-index: 15;
+		}
+		
+		
+		.table-detail-container#tbl_perflanguage > tbody > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perflanguage > tbody > tr > td:nth-of-type(2) {
+			z-index: 9;
+			position: sticky;
+			background-color: #FFFFFF;
+		}
+		.table-detail-container#tbl_perflanguage > tfoot > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perflanguage > tfoot > tr > td:nth-of-type(2) {
+			z-index: 9;
+			position: sticky;
+			/*background-color: #FFFFFF;*/
+		}
+		
+		.table-detail-container#tbl_perflanguage > thead > tr > th:nth-of-type(1),
+		.table-detail-container#tbl_perflanguage > tbody > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perflanguage > tfoot > tr > td:nth-of-type(1)		{
+			left: 0px;
+		}
+
+		
+		.table-detail-container#tbl_perflanguage > thead > tr > th:nth-of-type(2),
+		.table-detail-container#tbl_perflanguage > tbody > tr > td:nth-of-type(2),
+		.table-detail-container#tbl_perflanguage > tfoot > tr > td:nth-of-type(2)		{
+			left: 98.5px;
+		}
+		
+		
+		
+		 <!--CustomerLocationTab---->
+		.table-detail-container#tbl_perfcustomerloc > thead > tr > th:nth-of-type(1):before,
+		.table-detail-container#tbl_perfcustomerloc > tbody > tr > td:nth-of-type(1):before,
+		.table-detail-container#tbl_perfcustomerloc > tfoot > tr > td:nth-of-type(1):before	 {
+			content: "";
+			width: 1px;
+			height: 100%;
+			position: absolute;
+			left: -1px;
+			top: 0px;
+		}
+		.table-detail-container#tbl_perfcustomerloc > thead > tr > th:nth-of-type(1):before{
+			background-color: #3f617a;
+			}
+		.table-detail-container#tbl_perfcustomerloc > tbody > tr > td:nth-of-type(1):before,
+		.table-detail-container#tbl_perfcustomerloc > tfoot > tr > td:nth-of-type(1):before{
+		background-color: #e2e2e2;
+		}
+		
+  		.table-detail-container#tbl_perfcustomerloc > thead > tr > th:nth-of-type(1),
+		.table-detail-container#tbl_perfcustomerloc > thead > tr > th:nth-of-type(2) {
+			background-color: #3f617a;
+			text-align: left;
+			z-index: 15;
+		}
+		
+		
+		.table-detail-container#tbl_perfcustomerloc > tbody > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perfcustomerloc > tbody > tr > td:nth-of-type(2) {
+			z-index: 9;
+			position: sticky;
+			background-color: #FFFFFF;
+		}
+		.table-detail-container#tbl_perfcustomerloc > tfoot > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perfcustomerloc > tfoot > tr > td:nth-of-type(2) {
+			z-index: 9;
+			position: sticky;
+			/*background-color: #FFFFFF;*/
+		}
+		
+		.table-detail-container#tbl_perfcustomerloc > thead > tr > th:nth-of-type(1),
+		.table-detail-container#tbl_perfcustomerloc > tbody > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perfcustomerloc > tfoot > tr > td:nth-of-type(1)		{
+			left: 0px;
+		}
+
+		
+		.table-detail-container#tbl_perfcustomerloc > thead > tr > th:nth-of-type(2),
+		.table-detail-container#tbl_perfcustomerloc > tbody > tr > td:nth-of-type(2),
+		.table-detail-container#tbl_perfcustomerloc > tfoot > tr > td:nth-of-type(2)		{
+			left: 70.5px;
+		}
+		
+		 <!--DepartTab---->
+		.table-detail-container#tbl_perfdepartment > thead > tr > th:nth-of-type(1):before,
+		.table-detail-container#tbl_perfdepartment > tbody > tr > td:nth-of-type(1):before,
+		.table-detail-container#tbl_perfdepartment > tfoot > tr > td:nth-of-type(1):before	 {
+			content: "";
+			width: 1px;
+			height: 100%;
+			position: absolute;
+			left: -1px;
+			top: 0px;
+		}
+		.table-detail-container#tbl_perfdepartment > thead > tr > th:nth-of-type(1):before{
+			background-color: #3f617a;
+			}
+		.table-detail-container#tbl_perfdepartment > tbody > tr > td:nth-of-type(1):before,
+		.table-detail-container#tbl_perfdepartment > tfoot > tr > td:nth-of-type(1):before{
+		background-color: #e2e2e2;
+		}
+		
+  		.table-detail-container#tbl_perfdepartment > thead > tr > th:nth-of-type(1),
+		.table-detail-container#tbl_perfdepartment > thead > tr > th:nth-of-type(2) {
+			background-color: #3f617a;
+			text-align: left;
+			z-index: 15;
+		}
+		
+		
+		.table-detail-container#tbl_perfdepartment > tbody > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perfdepartment > tbody > tr > td:nth-of-type(2) {
+			z-index: 9;
+			position: sticky;
+			background-color: #FFFFFF;
+		}
+		.table-detail-container#tbl_perfdepartment > tfoot > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perfdepartment > tfoot > tr > td:nth-of-type(2) {
+			z-index: 9;
+			position: sticky;
+			/*background-color: #FFFFFF;*/
+		}
+		
+		.table-detail-container#tbl_perfdepartment > thead > tr > th:nth-of-type(1),
+		.table-detail-container#tbl_perfdepartment > tbody > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_perfdepartment > tfoot > tr > td:nth-of-type(1)		{
+			left: 0px;
+		}
+
+		
+		.table-detail-container#tbl_perfdepartment > thead > tr > th:nth-of-type(2),
+		.table-detail-container#tbl_perfdepartment > tbody > tr > td:nth-of-type(2),
+		.table-detail-container#tbl_perfdepartment > tfoot > tr > td:nth-of-type(2)		{
+			left: 91px;
+		}
+		
+    </style>
+</head>
+<body>
+    <header>
+       
+		<div class="amex-logo">
+            <img class="logo" src="images/amex-logo.png" alt="Amex" title="Amex" />
+        </div>
+            
+        <h2 class="h2-head">Queue Real Time Report</h2>
+        <div class="header-right hide">
+                
+        </div>
+    </header>
+    <div class="body-container">
+ 
+        <div class="report-body-container">
+
+            <div class="tab-container">
+                <div class="tab-header-container">
+                    <ul class="tab-head-list">
+                    <li class="tab-switcher-active">
+                        <p class="tab-switcher" data-tab-index="1">Channel</p>
+                    </li>
+                    <li class="">
+                        <p class="tab-switcher" data-tab-index="2">Language</p>
+                    </li>
+                    <li class="">
+                        <p class="tab-switcher" data-tab-index="3">Location</p>
+                    </li>
+                    <li class="">
+                        <p class="tab-switcher" data-tab-index="4">Department</p>
+                    </li>
+                </ul>
+              </div>
+              <div class="tab-body-container">
+                <div class="tab-body tab-body-active" data-tab-body="1">
+                    <div class="report-table-container">
+                        <div class="head-content hide">
+                            <h3 class="pull-left hide">
+                                Channel
+                            </h3>
+                            <div class="pull-right">
+                                <ul class="form-container flex table-search">
+                                    <li>
+                                        <div class="field-group">
+                                            <div class="label-field">
+                                                <label>Search :</label>
+                                            </div>
+                                            <div class="input-field">
+                                                <input type="text" class="input-text" id="inputsearch" data-search-table="tbl_perfchannel" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                      
+                        <div class="table-body-container">
+                            <table class="table-detail-container" id="tbl_perfchannel">
+                                <thead>
+                                    <tr>
+                                        <th style="width:105px; z-index:9">Channel</th>
+                                        <th>Contacts Waiting</th>
+                                        <th>Contacts Offered</th>
+                                        <th>Contacts Answered</th>
+                                        <th>Contacts Abandoned</th>
+                                         <th>Backlog</th>
+                                        <th>Deferred</th>
+                                        <th>Deferred%</th>
+                                        <th>Completed</th>
+										 <th>Replied</th>
+									   
+                                        <th>Answered Within Threshold</th>
+                                        <th>Answered After Threshold</th>
+                                        <th>Avg. Talk</th>
+                                        <th>Avg. Hold</th>
+                                        <th>Avg. Wrap</th>
+                                        <th>Avg. Handling Time</th>
+                                       <th>Average Queue time</th>
+                                        <th>Max. Wait Time</th>
+                                        <th>Transfer Initiated</th>
+                                        <th>Transfer Accepted</th>
+                                        <th>Consult Initiated</th>
+                                        <th>Consult Accepted</th>
+                                        <th>Service Level %</th>
+        
+                                        <th>Contacts Active</th>
+                                        <th>Contacts OnHold</th>
+                                        <!--<th>Agents Idle</th>
+                                        <th>Agents on Not Ready</th>
+                                         <th>Avg. Speed of Answer</th> -->
+										  <th>Email Active</th>
+                                        <th>Expected Wait Time</th>
+                                      
+                                        <th>Answered in DOH</th>
+                                        <th>Answered in WRO</th>
+                                        <th>Answered in AMD</th>
+                                        <th>Answered in CKG</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                               <tfoot>
+                                   
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-body" data-tab-body="2">
+                    <ul class="form-container flex" style="padding-bottom: 10px">
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Channel :</label>
+                                </div>
+                                <div class="input-field input-multiselect">
+                                    <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlLang_Channel"
+                                        multiple="multiple">
+            
+                                    </select>
+                                </div>
+                                <!--<div class="input-field">
+                                    <div class="dropdown-container bottom" id="divLang_Channel">
+                                        <input type="text" class="input-text" readonly placeholder="None" />
+                                        <i class="fa fa-chevron-down dropdown-icon-btn"></i>
+                                        <div class="dropdown-list-container">
+                                            <input type="text" class="input-search" id="inputsearch" />
+            
+                                            <ul class="singleselect-dropdown-list" id="ddlLang_Channel">
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Location :</label>
+                                </div>
+                                <div class="input-field input-multiselect">
+                                    <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlLang_Loc"
+                                        multiple="multiple">
+            
+                                    </select>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Department :</label>
+                                </div>
+                                <div class="input-field input-multiselect">
+                                    <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlLang_Depart"
+                                        multiple="multiple">
+            
+                                    </select>
+                                </div>
+                               
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="field-group hide">
+                                <div class="label-field">
+                                    <label>Answered in :</label>
+                                </div>
+                                <div class="input-field">
+                                    <div class="dropdown-container bottom" id="divLang_Location">
+                                        <input type="text" class="input-text" readonly placeholder="None" />
+                                        <i class="fa fa-chevron-down dropdown-icon-btn"></i>
+                                        <div class="dropdown-list-container">
+                                            <input type="text" class="input-search" id="inputsearch" />
+            
+                                            <ul class="singleselect-dropdown-list" id="ddlLang_Location">
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <div class="input-field">
+                                <ul class="btn-container">
+                                    <li class="pull-right"><button class="input-btn green-btn" onclick="btnLanguageSearchClick()">Search</button></li>
+            
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="report-table-container">
+                        <div class="head-content hide">
+                            <h3 class="pull-left hide">
+                                Language
+                            </h3>
+                            <div class="pull-right">
+                                <ul class="form-container flex table-search">
+                                    <li>
+                                        <div class="field-group">
+                                            <div class="label-field">
+                                                <label>Search :</label>
+                                            </div>
+                                            <div class="input-field">
+                                                <input type="text" class="input-text" id="inputsearch" data-search-table="tbl_perflanguage" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="table-body-container">
+                            <table class="table-detail-container" id="tbl_perflanguage">
+                                <thead>
+                                    <tr>
+                                        <th>Language</th>
+                                        <th>Contacts Waiting</th>
+                                        <th>Contacts Offered</th>
+                                        <th>Contacts Answered</th>
+                                        <th>Contacts Abandoned</th>
+                                        <th>Backlog</th>
+                                        <th>Deferred</th>
+                                        <th>Deferred%</th>
+                                        <th>Completed</th>
+										 <th>Replied</th>
+                                        <th>Answered Within Threshold</th>
+                                        <th>Answered After Threshold</th>
+                                        <th>Avg. Talk</th>
+                                        <th>Avg. Hold</th>
+                                        <th>Avg. Wrap</th>
+                                        <th>Avg. Handling Time</th>
+                                        <th>Average Queue time</th>
+                                        <th>Max. Wait Time</th>
+                                        <th>Transfer Initiated</th>
+                                        <th>Transfer Accepted</th>
+                                        <th>Consult Initiated</th>
+                                        <th>Consult Accepted</th>
+                                        <th>Service Level %</th>
+        
+                                        <th>Contacts Active</th>
+                                        <th>Contacts OnHold</th>
+                                        <!--<th>Agents Idle</th>
+                                        <th>Agents on Not Ready</th>
+                                         <th>Avg. Speed of Answer</th> -->
+										 <th>Email Active</th>
+                                        <th>Expected Wait Time</th>
+                                        
+                                        <th>Answered in DOH</th>
+                                        <th>Answered in WRO</th>
+                                        <th>Answered in AMD</th>
+                                        <th>Answered in CKG</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                   
+                                </tbody>
+                                <tfoot>
+                                   
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
+                <div class="tab-body" data-tab-body="3">
+                    <ul class="form-container flex" style="padding-bottom: 10px">
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Channel :</label>
+                                </div>
+                                <div class="input-field input-multiselect">
+                                    <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlLoc_Channel"
+                                        multiple="multiple">
+            
+                                    </select>
+                                </div>
+                                
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Department :</label>
+                                </div>
+                                <div class="input-field input-multiselect">
+                                    <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlLoc_Depart"
+                                        multiple="multiple">
+            
+                                    </select>
+                                </div>
+                                
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Language :</label>
+                                </div>
+                                <div class="input-field input-multiselect">
+                                    <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlLoc_Language"
+                                        multiple="multiple">
+            
+                                    </select>
+                                </div>
+                                
+                                
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="field-group hide">
+                                <div class="label-field">
+                                    <label>Answered in :</label>
+                                </div>
+                                <div class="input-field">
+                                    <div class="dropdown-container bottom" id="divLoc_Location">
+                                        <input type="text" class="input-text" readonly placeholder="None" />
+                                        <i class="fa fa-chevron-down dropdown-icon-btn"></i>
+                                        <div class="dropdown-list-container">
+                                            <input type="text" class="input-search" id="inputsearch" />
+            
+                                            <ul class="singleselect-dropdown-list" id="ddlLoc_Location">
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-field">
+                                <ul class="btn-container">
+                                    <li class="pull-right"><button class="input-btn green-btn" onclick="btnCustomerLocSearchClick()">Search</button></li>
+            
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="report-table-container">
+                        <div class="head-content hide">
+                            <h3 class="pull-left hide">
+                                Location
+                            </h3>
+                            <div class="pull-right">
+                                <ul class="form-container flex table-search">
+                                    <li>
+                                        <div class="field-group">
+                                            <div class="label-field">
+                                                <label>Search :</label>
+                                            </div>
+                                            <div class="input-field">
+                                                <input type="text" class="input-text" id="inputsearch" data-search-table="tbl_perfcustomerloc" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="table-body-container">
+                            <table class="table-detail-container" id="tbl_perfcustomerloc">
+                                <thead>
+                                    <tr>
+                                        <th>Location</th>
+                                        <th>Contacts Waiting</th>
+                                        <th>Contacts Offered</th>
+                                        <th>Contacts Answered</th>
+                                        <th>Contacts Abandoned</th>
+                                        <th>Backlog</th>
+                                        <th>Deferred</th>
+                                        <th>Deferred%</th>
+                                        <th>Completed</th>
+										 <th>Replied</th>
+                                        <th>Answered Within Threshold</th>
+                                        <th>Answered After Threshold</th>
+                                        <th>Avg. Talk</th>
+                                        <th>Avg. Hold</th>
+                                        <th>Avg. Wrap</th>
+                                        <th>Avg. Handling Time</th>
+                                        <th>Average Queue time</th>
+                                        <th>Max. Wait Time</th>
+                                        <th>Transfer Initiated</th>
+                                        <th>Transfer Accepted</th>
+										 <th>Consult Initiated</th>
+                                        <th>Consult Accepted</th>
+                                        <th>Service Level %</th>
+        
+                                        <th>Contacts Active</th>
+                                        <th>Contacts OnHold</th>
+                                        <!--<th>Agents Idle</th>
+                                        <th>Agents on Not Ready</th>
+                                         <th>Avg. Speed of Answer</th> -->
+										 <th>Email Active</th>
+                                        <th>Expected Wait Time</th>
+                                       
+
+                                        <th>Answered in DOH</th>
+                                        <th>Answered in WRO</th>
+                                        <th>Answered in AMD</th>
+                                        <th>Answered in CKG</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                                <tfoot>
+                                   
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-body" data-tab-body="4">
+                    <ul class="form-container flex" style="padding-bottom: 10px">
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Channel :</label>
+                                </div>
+                                <div class="input-field input-multiselect">
+                                    <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlDepart_Channel"
+                                        multiple="multiple">
+            
+                                    </select>
+                                </div>
+                               
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Location :</label>
+                                </div>
+                                <div class="input-field input-multiselect">
+                                    <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlDepart_Loc"
+                                        multiple="multiple">
+            
+                                    </select>
+                                </div>
+                               
+                               
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Language :</label>
+                                </div>
+                                <div class="input-field input-multiselect">
+                                    <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlDepart_Language"
+                                        multiple="multiple">
+            
+                                    </select>
+                                </div>
+                           
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="field-group hide">
+                                <div class="label-field">
+                                    <label>Answered in :</label>
+                                </div>
+                                <div class="input-field">
+                                    <div class="dropdown-container bottom" id="divDepart_Location">
+                                        <input type="text" class="input-text" readonly placeholder="None" />
+                                        <i class="fa fa-chevron-down dropdown-icon-btn"></i>
+                                        <div class="dropdown-list-container">
+                                            <input type="text" class="input-search" id="inputsearch" />
+            
+                                            <ul class="singleselect-dropdown-list" id="ddlDepart_Location">
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="input-field">
+                                <ul class="btn-container">
+                                    <li class="pull-right"><button class="input-btn green-btn" onclick="btnDepartSearchClick()">Search</button></li>
+            
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="report-table-container">
+                        <div class="head-content hide">
+                            <h3 class="pull-left hide">
+                                Department
+                            </h3>
+                            <div class="pull-right">
+                                <ul class="form-container flex table-search">
+                                    <li>
+                                        <div class="field-group">
+                                            <div class="label-field">
+                                                <label>Search :</label>
+                                            </div>
+                                            <div class="input-field">
+                                                <input type="text" class="input-text" id="inputsearch" data-search-table="tbl_perfdepartment" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="table-body-container">
+                            <table class="table-detail-container" id="tbl_perfdepartment">
+                                <thead>
+                                    <tr>
+                                        <th>Department</th>
+                                        <th>Contacts Waiting</th>
+                                        <th>Contacts Offered</th>
+                                        <th>Contacts Answered</th>
+                                        <th>Contacts Abandoned</th>
+                                        <th>Backlog</th>
+                                        <th>Deferred</th>
+                                        <th>Deferred%</th>
+                                        <th>Completed</th>
+										 <th>Replied</th>
+                                        <th>Answered Within Threshold</th>
+                                        <th>Answered After Threshold</th>
+                                        <th>Avg. Talk</th>
+                                        <th>Avg. Hold</th>
+                                        <th>Avg. Wrap</th>
+                                        <th>Avg. Handling Time</th>
+                                        <th>Average Queue time</th>
+                                        <th>Max. Wait Time</th>
+                                        <th>Transfer Initiated</th>
+                                        <th>Transfer Accepted</th>
+										 <th>Consult Initiated</th>
+                                        <th>Consult Accepted</th>
+                                        <th>Service Level %</th>
+        
+                                        <th>Contacts Active</th>
+                                        <th>Contacts OnHold</th>
+                                        <!--<th>Agents Idle</th>
+                                        <th>Agents on Not Ready</th>
+                                         <th>Avg. Speed of Answer</th> -->
+										 <th>Email Active</th>
+                                        <th>Expected Wait Time</th>
+                                       
+
+                                        <th>Answered in DOH</th>
+                                        <th>Answered in WRO</th>
+                                        <th>Answered in AMD</th>
+                                        <th>Answered in CKG</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                </tbody>
+                                <tfoot>
+                                   
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+        </div>      
+    </div>
+</body >
+
+<script>
+   var ddlLang_SelectedChannel = '';
+   var ddlLang_SelectedLoc = '';
+   var ddlLang_SelectedDepart = '';
+   var ddlLang_SelectedLocation = '';
+
+   var ddlLoc_SelectedChannel = '';
+   var ddlLoc_SelectedLanguage = '';
+   var ddlLoc_SelectedDepart = '';
+   var ddlLoc_SelectedLocation = '';
+
+   
+   var ddlDepart_SelectedChannel = '';
+   var ddlDepart_SelectedLanguage = '';
+   var ddlDepart_SelectedLoc = '';
+   var ddlDepart_SelectedLocation = '';
+
+   var ddlLoaded = false;
+
+   var dashboard ='';
+    $(document).ready(
+        function () {
+			dashboard ='QUEUE1';
+            get_response_queue();
+			refreshQueueDashboardEvent();
+    });
+    // Language Table Filter
+    $(function () {
+        $(document).on("click", '#divLang_Channel .singleselect-dropdown-list li', function () {
+            var _selected = $('#divLang_Channel > .input-text').val();
+             if (_selected != "None"){
+                ddlLang_SelectedChannel = _selected;
+            }
+            else
+                ddlLang_SelectedChannel = "";
+				
+            onChannelDropDownChangeFromLanguage(queueList_new, ddlLang_SelectedChannel);
+        });
+    });
+
+    $(function () {
+        $(document).on("click", '#divLang_Loc .singleselect-dropdown-list li', function () {
+            var _selected = $('#divLang_Loc > .input-text').val();
+            if (_selected != "None")
+                ddlLang_SelectedLoc = _selected;
+            else
+                ddlLang_SelectedLoc = "";
+            
+        });
+    });
+
+    $(function () {
+        $(document).on("click", '#divLang_Depart .singleselect-dropdown-list li', function () {
+            var _selected = $('#divLang_Depart > .input-text').val();
+            if (_selected != "None")
+                ddlLang_SelectedDepart = _selected;
+            else
+                ddlLang_SelectedDepart = "";
+            
+        });
+    });
+
+    $(function () {
+        $(document).on("click", '#divLang_Location .singleselect-dropdown-list li', function () {
+            var _selected = $('#divLang_Location > .input-text').val();
+            if (_selected != "None")
+                ddlLang_SelectedLocation = _selected;
+            else
+                ddlLang_SelectedLocation = "";
+        });
+    });
+
+    function btnLanguageSearchClick() {
+
+        ddlLang_SelectedChannel = ($('#ddlLang_Channel').val() == "None" ? '' : $('#ddlLang_Channel').val());
+        ddlLang_SelectedLoc = ($('#ddlLang_Loc').val() == "None" ? '' : $('#ddlLang_Loc').val());
+        ddlLang_SelectedDepart = ($('#ddlLang_Depart').val() == "None" ? '' : $('#ddlLang_Depart').val());
+        ddlLang_SelectedLocation = ($('#ddlLang_Location').val() == "None" ? '' : $('#ddlLang_Location').val());
+        loadLanguageDetails(queueList_new);
+    }
+    // Language Table Filter
+
+    // Customer Loc Table Filter
+    $(function () {
+        $(document).on("click", '#divLoc_Channel .singleselect-dropdown-list li', function () {
+            var _selected = $('#divLoc_Channel > .input-text').val();
+            if (_selected != "None"){
+                ddlLoc_SelectedChannel = _selected;
+                
+            }
+            else
+                ddlLoc_SelectedChannel = "";
+				
+           onChannelDropDownChangeFromLoc(queueList_new, ddlLoc_SelectedChannel); 
+        });
+    });
+
+    $(function () {
+        $(document).on("click", '#divLoc_Language .singleselect-dropdown-list li', function () {
+            var _selected = $('#divLoc_Language > .input-text').val();
+            if (_selected != "None")
+                ddlLoc_SelectedLanguage = _selected;
+            else
+                ddlLoc_SelectedLanguage = "";
+            
+        });
+    });
+
+    $(function () {
+        $(document).on("click", '#divLoc_Depart .singleselect-dropdown-list li', function () {
+            var _selected = $('#divLoc_Depart > .input-text').val();
+            if (_selected != "None")
+                ddlLoc_SelectedDepart = _selected;
+            else
+                ddlLoc_SelectedDepart = "";
+            
+        });
+    });
+
+    $(function () {
+        $(document).on("click", '#divLoc_Location .singleselect-dropdown-list li', function () {
+            var _selected = $('#divLoc_Location > .input-text').val();
+            if (_selected != "None")
+                ddlLoc_SelectedLocation = _selected;
+            else
+                ddlLoc_SelectedLocation = "";
+        });
+    });
+
+    function btnCustomerLocSearchClick() {
+
+        ddlLoc_SelectedChannel = ($('#ddlLoc_Channel').val() == "None" ? '' : $('#ddlLoc_Channel').val());
+        ddlLoc_SelectedLanguage = ($('#ddlLoc_Language').val() == "None" ? '' : $('#ddlLoc_Language').val());
+        ddlLoc_SelectedDepart = ($('#ddlLoc_Depart').val() == "None" ? '' : $('#ddlLoc_Depart').val());
+        ddlLoc_SelectedLocation = ($('#ddlLoc_Location').val() == "None" ? '' : $('#ddlLoc_Location').val());
+        loadCustomerLocDetails(queueList_new);
+    }
+    // Customer Loc Table Filter
+
+    // Depart Table Filter
+    $(function () {
+        $(document).on("click", '#divDepart_Channel .singleselect-dropdown-list li', function () {
+            var _selected = $('#divDepart_Channel > .input-text').val();
+             if (_selected != "None"){
+                ddlDepart_SelectedChannel = _selected;
+               
+            }
+            else
+                ddlDepart_SelectedChannel = "";
+            
+			onChannelDropDownChangeFromDepart(queueList_new, ddlDepart_SelectedChannel);
+        });
+    });
+
+    $(function () {
+        $(document).on("click", '#divDepart_Language .singleselect-dropdown-list li', function () {
+            var _selected = $('#divDepart_Language > .input-text').val();
+            if (_selected != "None")
+                ddlDepart_SelectedLanguage = _selected;
+            else
+                ddlDepart_SelectedLanguage = "";
+            
+        });
+    });
+
+    $(function () {
+        $(document).on("click", '#divDepart_Loc .singleselect-dropdown-list li', function () {
+            var _selected = $('#divDepart_Loc > .input-text').val();
+            if (_selected != "None")
+                ddlDepart_SelectedLoc = _selected;
+            else
+                ddlDepart_SelectedLoc = "";
+            
+        });
+    });
+
+    $(function () {
+        $(document).on("click", '#divDepart_Location .singleselect-dropdown-list li', function () {
+            var _selected = $('#divDepart_Location > .input-text').val();
+            if (_selected != "None")
+                ddlDepart_SelectedLocation = _selected;
+            else
+                ddlDepart_SelectedLocation = "";
+        });
+    });
+
+    function btnDepartSearchClick() {
+
+        ddlDepart_SelectedChannel = ($('#ddlDepart_Channel').val() == "None" ? '' : $('#ddlDepart_Channel').val());
+        ddlDepart_SelectedLanguage = ($('#ddlDepart_Language').val() == "None" ? '' : $('#ddlDepart_Language').val());
+        ddlDepart_SelectedLoc = ($('#ddlDepart_Loc').val() == "None" ? '' : $('#ddlDepart_Loc').val());
+        ddlDepart_SelectedLocation = ($('#ddlDepart_Location').val() == "None" ? '' : $('#ddlDepart_Location').val());
+        loadDepartDetails(queueList_new);
+    }
+    // Customer Loc Table Filter
+</script>
+
+</html >
+

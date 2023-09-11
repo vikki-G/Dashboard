@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amex</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="fonts/Font-Awesome-5.13.0/font-awesome.css" />
+    <link type="text/css" rel="stylesheet" href="fonts/Roboto-Font/Roboto-RCondensed.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" type="text/css" href="css/dataTable.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-custom-multiselect.css">
+    <link rel="stylesheet" type="text/css" href="css/tab.css">
+    
+    <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/inline-script.js"></script>
+    <script type="text/javascript" src="js/alasql.min.js"></script>
+    <script type="text/javascript" src="js/tab.js"></script>
+    
+    <script type="text/javascript" src="supervisor-realtime-report.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+
+    <style>
+	.report-body-container .report-table-container {
+	height: 100%;
+	}
+        .table-detail-container#supervisorloginsummarytbl>tbody>tr.active>td:first-child,
+        .table-detail-container#supervisorloginsummarytbl>tbody>tr.active>td {
+            background-color: #611b3f;
+            color: #FFFFFF;
+        }
+        /* sorting*/
+        table.table-detail-container > thead > tr > th.sorting::after {
+            position: absolute;
+            z-index: 9;
+            font-family: 'Font Awesome 5 Free';
+            color: #FFFFFF;
+            width: 8px;
+            height: 8px;
+            right: 10px;
+            font-weight: 900;
+            content: "\f0dd";
+            top: 48%;
+            transform: translateY(-100%);
+        }
+
+        table.table-detail-container > thead > tr > th.sorting::before {
+            position: absolute;
+            z-index: 9;
+            font-family: 'Font Awesome 5 Free';
+            color: #FFFFFF;
+            width: 8px;
+            height: 8px;
+            right: 10px;
+            font-weight: 900;
+            content: "\f0de";
+            top: 48%;
+            transform: translateY(-100%);
+        }
+
+        table.table-detail-container > thead > tr > th.sorting.desc::after {
+            color: #88A3A6;
+        }
+
+        table.table-detail-container > thead > tr > th.sorting.asc::before {
+            color: #88A3A6;
+        }
+
+        .table-detail-container > thead > tr > th.sorting {
+            padding-right: 23px;
+        }
+		
+		.table-detail-container#tbl_supervisorloginsummary > thead > tr:first-child > th:nth-of-type(1),
+		.table-detail-container#tbl_supervisorloginsummary > thead > tr:first-child > th:nth-of-type(2),
+		.table-detail-container#tbl_supervisorloginsummary > thead > tr:first-child > th:nth-of-type(3)		{
+			background-color: #3f617a;
+			text-align: left;
+			z-index: 10;
+		}
+		
+		
+		.table-detail-container#tbl_supervisorloginsummary > tbody > tr > td:nth-of-type(1),
+		.table-detail-container#tbl_supervisorloginsummary > tbody > tr > td:nth-of-type(2),
+		.table-detail-container#tbl_supervisorloginsummary > tbody > tr > td:nth-of-type(3)		{
+			z-index: 9;
+			position: sticky;
+			background-color: #FFFFFF;
+		}
+         /* sorting*/
+		.table-detail-container#tbl_supervisorloginsummary > thead > tr > th {
+			white-space:nowrap;
+		}
+    </style>
+
+</head>
+
+<body>
+    <header>
+
+        <div class="amex-logo">
+            <img class="logo" src="images/amex_logo.png" alt="Amex" title="Amex" />
+        </div>
+
+        <h2 class="h2-head">Agent Detailed Dashboard</h2>
+        <div class="header-right hide">
+
+        </div>
+    </header>
+    <div class="body-container">
+
+        <ul class="form-container flex" style="padding-bottom: 10px">
+            <li>
+                <div class="field-group">
+                    <div class="label-field">
+                        <label>Team Name :</label>
+                    </div>
+                    <div class="input-field input-multiselect">
+                        <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlSelectTeam"
+                            multiple="multiple">
+
+                        </select>
+                    </div>
+                    <!--<div class="input-field">
+                        <div class="dropdown-container bottom" id="TeamNameDropdown">
+                            <input type="text" class="input-text" readonly placeholder="None" />
+                            <i class="fa fa-chevron-down dropdown-icon-btn"></i>
+                            <div class="dropdown-list-container">
+                                <input type="text" class="input-search" id="inputsearch" />
+
+                                <ul class="singleselect-dropdown-list" id="ddlSelectTeam">
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </li>
+            <li>
+                <div class="field-group">
+                    <div class="label-field">
+                        <label>Select Agent :</label>
+                    </div>
+                    <div class="input-field input-multiselect">
+                        <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlSelectAgent"
+                            multiple="multiple">
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="field-group">
+                    <div class="label-field">
+                        <label>Channel State :</label>
+                    </div>
+                    <div class="input-field input-multiselect">
+                        <select class="input-select" style="height:30px;width:180px" tabindex="0" id="ddlChannelState"
+                            multiple="multiple">
+
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="input-field">
+                    <ul class="btn-container">
+                        <li class="pull-right"><button class="input-btn green-btn"
+                                onclick="btnSearchClick()">Search</button></li>
+
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <div class="report-body-container">
+            <div class="tab-container">
+                <div class="tab-header-container">
+                    <ul class="tab-head-list">
+                        <li class="tab-switcher-active">
+                            <p class="tab-switcher" data-tab-index="1">Performance Of Team</p>
+                        </li>
+                        <li class="">
+                            <p class="tab-switcher" data-tab-index="2">Agent Details</p>
+                        </li>
+                        <li class="">
+                            <p class="tab-switcher" data-tab-index="3">Login Summary</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-body-container">
+                    <div class="tab-body tab-body-active" data-tab-body="1">
+                        <div class="report-table-container">
+                            <div class="head-content">
+                                <h3 class="pull-left">
+                                    Performance of the Team
+                                </h3>
+                                <div class="pull-right">
+                                    <ul class="form-container flex table-search">
+                                        <li>
+                                            <div class="field-group">
+                                                <div class="label-field">
+                                                    <label>Search :</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <input type="text" class="input-text" id="inputsearch_performanceteam"
+                                                        data-search-table="tbl_performanceteam" />
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="table-body-container">
+                                <table class="table-detail-container" id="tbl_performanceteam">
+                                    <thead>
+                                        <tr>
+                                            <!-- ADDED SORTED CLASS HERE-->
+                                            <th class="sorting">Team</th>
+                                            <th class="sorting">Channel</th>
+                                            <th class="sorting">Answered</th>
+                                            <th class="sorting">Avg. Talk</th>
+                                            <th class="sorting">Avg. Hold</th>
+                                            <th class="sorting">Avg. Wrap</th>
+                                            <th class="sorting">AHT</th>
+                                            <th class="sorting">Transfer Initiated</th>
+                                            <th class="sorting">Transfer Accepted</th>
+                                            <th class="sorting">Consult Initiated</th>
+                                            <th class="sorting">Consult Accepted</th>
+                                          <!--  <th class="hide sorting">Concurrency</th>-->
+                                            <th class="sorting">Outbound Calls</th>
+                                            <th class="sorting">Outbound Duration</th>
+                                            <th class="sorting">Hold Count</th>
+                                            <th class="sorting">Hold Duration</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-body" data-tab-body="2">
+                        <div class="report-table-container">
+                            <div class="head-content">
+                                <h3 class="pull-left hide">
+                                    Agent Details
+                                </h3>
+                                <div class="pull-right">
+                                    <ul class="form-container flex table-search">
+                                        <li>
+                                            <div class="field-group">
+                                                <div class="label-field">
+                                                    <label>Search :</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <input type="text" class="input-text" id="inputsearch_agentdetails"
+                                                        data-search-table="tbl_agentdetails" />
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="table-body-container">
+                                <table class="table-detail-container" id="tbl_agentdetails">
+                                    <thead>
+                                      <tr>
+                                              <!-- ADDED SORTED CLASS HERE-->
+                                            <th class="sorting">Agent ID</th>
+                                            <th class="sorting">Agent Name</th>
+                                            <th class="sorting">Team</th>
+                                            <th class="sorting" style="text-align:left;">Channel</th>
+                                            <th class="sorting">Answered</th>
+                                            <th class="sorting">Completed</th>
+                                            <th class="sorting">Deferred</th>
+                                            <th class="sorting">Avg. Talk</th>
+                                            <th class="sorting">Avg. Hold</th>
+                                            <th class="sorting">Avg. Wrap</th>
+                                            <th class="sorting">AHT</th>
+                                            <th class="sorting hide">Concurrency</th>
+                                            <th class="sorting hide">Outbound Calls</th>
+                                            <th class="sorting hide">Outbound Duration</th>
+                                            <th class="sorting hide">Hold Count</th>
+                                            <th class="sorting hide">Hold Duration</th>
+                                            <th class="sorting hide">Total Login Duration</th>
+                                            <th class="sorting hide">Total Not Ready</th>
+                                            <th class="sorting hide">Occupancy %</th>
+                                            <th class="sorting hide">Adherence %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-body " data-tab-body="3">
+                        <div class="report-table-container">
+                            <div class="head-content">
+                                <h3 class="pull-left hide">
+                                    Login Summary
+                                </h3>
+                                <div class="pull-right">
+                                    <ul class="form-container flex table-search">
+                                        <li>
+                                            <div class="field-group">
+                                                <div class="label-field">
+                                                    <label>Search :</label>
+                                                </div>
+                                                <div class="input-field">
+                                                    <input type="text" class="input-text" id="inputsearch_supervisorloginsummary"
+                                                        data-search-table="tbl_supervisorloginsummary" />
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="table-body-container">
+                                <table class="table-detail-container" id="tbl_supervisorloginsummary">
+                                    <thead>
+
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="report-table-container pull-left hide" style="padding-right: 5px;width: 50%;">
+            <div class="head-content">
+                <h3 class="pull-left">
+                    Login Summary
+                </h3>
+                <div class="pull-right">
+                    <ul class="form-container flex table-search">
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Search :</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="text" class="input-text" id="inputsearch"
+                                        data-search-table="supervisorloginsummarytbl" />
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="table-body-container">
+                <table class="table-detail-container" id="supervisorloginsummarytbl">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Agent Name</th>
+                            <th rowspan="2">Current State</th>
+                            <th rowspan="2">Current State Duration</th>
+                            <th rowspan="2">Not Ready %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="report-table-container pull-left hide" style="padding-left: 5px;width: 50%;">
+            <div class="head-content">
+                <h3 class="pull-left">AUX Summary (Agent 3)</h3>
+                <div class="pull-right" style="display: none;">
+                    <ul class="form-container flex table-search">
+                        <li>
+                            <div class="field-group">
+                                <div class="label-field">
+                                    <label>Search :</label>
+                                </div>
+                                <div class="input-field">
+                                    <input type="text" class="input-text" id="inputsearch"
+                                        data-search-table="supweciaoeAUXSummarytbl">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="table-body-container">
+                <table class="table-detail-container" id="supweciaoeAUXSummarytbl">
+                    <thead>
+                        <tr>
+                            <th>
+                                AUX Code
+
+                            </th>
+                            <th>
+                                AUX Name
+                            </th>
+                            <th>
+                                AUX Count
+                            </th>
+                            <th>
+                                Duration
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2" style="background-color: #d0d0d0;font-weight: 500;">Total</td>
+
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+<script>
+    var _supervisorId = ''
+    var ddlLoaded = false;
+    var acmUserDetails = [];
+    var acmGroupDetails = [];
+    var supervisorGroups = [];
+    
+    var _supervisorTeam = [];
+    var _teamList = [];
+    var _selectedTeam = '';
+    var _selectedAgent = '';
+    var _selectedState = '';
+
+
+    $(document).ready(
+       function () {
+		    _supervisorId = getParameterByName('supervisorId');
+			//getACMOceanaUsersDetails();
+           //getACMUsersDetails();
+            getACMAgentDetails();
+            getACMGroupDetails();
+            setTimeout(function () { get_response_supervisor(); }, 2000);
+			//get_response_supervisor();
+			refreshSupervisorDashboardEvent();
+
+        });
+
+
+     //Search Parameters
+    function btnSearchClick() {
+
+        //_selectedTeam = ($('#ddlSelectTeam').val() == "None" ? '' : $('#ddlSelectTeam').val());
+        _selectedAgent = $('#ddlSelectAgent').val();
+		_selectedState = $('#ddlChannelState').val();
+		bindAgentDetailsTables(agentList_new);
+
+    }
+
+
+</script>
+
+</html>

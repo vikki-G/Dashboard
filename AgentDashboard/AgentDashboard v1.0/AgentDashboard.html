@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Dashboard</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link type="text/css" rel="stylesheet" href="fonts/Font-Awesome-5.13.0/font-awesome.css" />
+    <link type="text/css" rel="stylesheet" href="fonts/Roboto-Font/Roboto-RCondensed.css" />
+    <link rel="stylesheet" type="text/css" href="custom/css/style.css">
+    <link rel="stylesheet" type="text/css" href="custom/css/bootstrap.min.css">
+    <script type="text/javascript" src="custom/js/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="AgentDashboard.js"></script>
+    <script type="text/javascript" src="custom/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="body-container">
+        <header class="header-container">
+            <div class="amex-logo">
+                <img class="logo" src="custom/images/amex_logo.png" alt="Amex" title="Amex" />
+            </div>
+            <h2 class="h2-head">Agent Dashboard</h2>
+            <div class="header-right ">
+                <div class="agent-detail">
+                    <img class="agent-icon" src="custom/images/caller-icon.png" alt="" title="" />
+                    <label class="agent-name" id="lbl_agentId"></label>
+                </div>
+                
+            </div>
+        </header>
+        <section class="section-container">
+            <div  class="dashboard-container">
+                <ul id="main" class="dashboard-list-container">
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script type="text/javascript">
+        var agentLogonDuration = '';
+        var agentNotReadyDuration = '';
+        var agentActiveDuration = '';
+        var agentBlendedActiveDuration = '';
+        var agentIdleDuration = '';
+        var agentAcwDuration ='';
+        var agentState = '';
+        var agentWorkState = '';
+        var agentLastLoginTime = '';
+        var agentNotReadyTimeStamp = '';
+        var agentWorkStateTimeStamp = '';
+        var agentVoiceCallState = '';
+        var agentActiveInteractions ='';
+		var agentLastStateTimeStamp ='';
+		var agentLastWorkStateTimeStamp = '';
+        var agentLastWorkState = '';
+
+        var average_csat_score ='0.00';
+        var total_csat_score ='0';
+        var total_csat_count ='0'
+        var _firstCall = true;
+		var counter =0;
+		
+		var agentWorkDuration=0;
+        var agentLogonDurationTick = '00:00:00';
+        var agentNotReadyDurationTick = '00:00:00';
+        var agentActiveDurationTick = '00:00:00';
+        var agentIdleDurationTick = '00:00:00';
+		var agentWorkTimeTick = '00:00:00';
+        $(function () {
+            loadAgentDashboard();
+        });
+    </script>
+</body>
+
+
+</html>
